@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Reorientación de la Revolución Nacional</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --rojo:    #C0392B;
+    --amarillo:#E8B44E;
+    --verde:   #2E7D50;
+    --papel:   #F5EFE0;
+    --tinta:   #1A1209;
+    --sepia:   #7A5C3A;
+    --humo:    #EDE7D6;
+    --linea:   #C8B89A;
+    --blanco:  #FDFAF4;
+    --correcto:#2E7D50;
+    --incorrecto:#C0392B;
+    --pendiente:#5A6471;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--papel);
+    color: var(--tinta);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* ── HERO ─────────────────────────────────────────── */
+  .hero {
+    background: var(--tinta);
+    color: var(--papel);
+    padding: 80px 24px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 39px,
+      rgba(255,255,255,.04) 39px, rgba(255,255,255,.04) 40px
+    );
+    pointer-events: none;
+  }
+  .hero-year {
+    display: inline-block;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(72px, 14vw, 140px);
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--amarillo);
+    line-height: 1;
+    margin-bottom: 8px;
+    opacity: .9;
+  }
+  .hero-sub {
+    letter-spacing: .22em;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--amarillo);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 5vw, 48px);
+    font-weight: 700;
+    max-width: 720px;
+    margin: 0 auto 20px;
+    line-height: 1.2;
+    color: var(--blanco);
+  }
+  .hero-desc {
+    max-width: 580px;
+    margin: 0 auto;
+    color: #B8AFA0;
+    font-size: 15px;
+  }
+  .flag-stripe {
+    height: 6px;
+    background: linear-gradient(90deg, var(--rojo) 33.3%, var(--amarillo) 33.3% 66.6%, var(--verde) 66.6%);
+    margin-top: 56px;
+  }
+
+  /* ── LAYOUT ───────────────────────────────────────── */
+  .container {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── SECCIONES DE CONTENIDO ───────────────────────── */
+  .section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--linea);
+  }
+  .section:last-of-type { border-bottom: none; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--sepia);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--tinta);
+    margin-bottom: 20px;
+  }
+  .section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--tinta);
+    margin: 28px 0 10px;
+    padding-left: 14px;
+    border-left: 3px solid var(--amarillo);
+  }
+  .section p { margin-bottom: 16px; color: #2E2318; }
+
+  /* ── CITA DESTACADA ───────────────────────────────── */
+  .quote-block {
+    border-left: 4px solid var(--rojo);
+    background: var(--humo);
+    padding: 20px 24px;
+    margin: 28px 0;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--sepia);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── TABLA COMPARATIVA ────────────────────────────── */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  @media (max-width: 560px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-card {
+    background: var(--humo);
+    border: 1px solid var(--linea);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .compare-card .card-label {
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--sepia);
+    margin-bottom: 8px;
+  }
+  .compare-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--tinta); }
+  .compare-card p { font-size: 14px; color: #3E2F1A; margin: 0; }
+  .compare-card.izq { border-top: 3px solid var(--rojo); }
+  .compare-card.der { border-top: 3px solid var(--verde); }
+
+  /* ── TIMELINE ─────────────────────────────────────── */
+  .timeline { margin: 28px 0; position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 10px; top: 0; bottom: 0;
+    width: 2px; background: var(--linea);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -28px; top: 5px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--amarillo);
+    border: 2px solid var(--tinta);
+  }
+  .tl-year {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    color: var(--rojo);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .tl-text { font-size: 14px; color: #2E2318; line-height: 1.6; }
+
+  /* ── LISTA DE LOGROS ──────────────────────────────── */
+  .logros-list { list-style: none; margin: 20px 0; }
+  .logros-list li {
+    display: flex; gap: 12px; align-items: flex-start;
+    margin-bottom: 12px; font-size: 14px; color: #2E2318;
+  }
+  .logros-list li::before {
+    content: '▸';
+    color: var(--amarillo);
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .logros-list li strong { color: var(--tinta); font-weight: 600; }
+
+  /* ── QUIZ ─────────────────────────────────────────── */
+  .quiz-section {
+    background: var(--tinta);
+    padding: 64px 0;
+    margin-top: 0;
+  }
+  .quiz-section .container { color: var(--papel); }
+  .quiz-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .quiz-header .section-label { color: var(--amarillo); }
+  .quiz-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 700;
+    color: var(--blanco);
+    margin-bottom: 10px;
+  }
+  .quiz-header p { color: #9A8E80; font-size: 15px; }
+
+  .progress-bar-wrap {
+    background: #2E2318;
+    border-radius: 999px;
+    height: 6px;
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--amarillo);
+    border-radius: 999px;
+    transition: width .5s ease;
+    width: 0%;
+  }
+
+  .question-card {
+    background: #231A0F;
+    border: 1px solid #3A2E20;
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+    transition: border-color .2s;
+  }
+  .question-card.answered { border-color: #5A4A30; }
+
+  .q-number {
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--amarillo);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .q-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(16px, 2.5vw, 20px);
+    font-weight: 700;
+    color: var(--blanco);
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .options-grid { display: flex; flex-direction: column; gap: 10px; }
+
+  .option-btn {
+    display: flex; align-items: center; gap: 14px;
+    background: #2E2318;
+    border: 1.5px solid #4A3A28;
+    border-radius: 8px;
+    padding: 14px 18px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #C8B89A;
+    text-align: left;
+    transition: background .15s, border-color .15s, color .15s;
+    width: 100%;
+  }
+  .option-btn:hover:not(:disabled) {
+    background: #3A2E20;
+    border-color: var(--amarillo);
+    color: var(--blanco);
+  }
+  .option-btn.selected {
+    background: #3A3010;
+    border-color: var(--amarillo);
+    color: var(--amarillo);
+  }
+  .option-btn:disabled { cursor: default; }
+  .option-btn.correct-reveal {
+    background: #122A1A;
+    border-color: var(--correcto);
+    color: #6EE0A0;
+  }
+  .option-btn.wrong-reveal {
+    background: #2A1010;
+    border-color: var(--incorrecto);
+    color: #F08080;
+  }
+
+  .option-letter {
+    width: 28px; height: 28px;
+    border: 1.5px solid currentColor;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    flex-shrink: 0;
+    transition: background .15s;
+  }
+
+  .feedback-box {
+    display: none;
+    margin-top: 16px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .feedback-box.show { display: block; }
+  .feedback-box.ok {
+    background: #122A1A;
+    border-left: 4px solid var(--correcto);
+    color: #A8DFB8;
+  }
+  .feedback-box.fail {
+    background: #2A1010;
+    border-left: 4px solid var(--incorrecto);
+    color: #F0A8A8;
+  }
+  .feedback-box strong { display: block; margin-bottom: 4px; }
+
+  /* ── BOTÓN REVISAR ────────────────────────────────── */
+  .check-wrap {
+    text-align: center;
+    padding: 40px 0 20px;
+  }
+  .btn-check {
+    background: var(--amarillo);
+    color: var(--tinta);
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 16px 48px;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: .04em;
+    transition: background .15s, transform .1s;
+    box-shadow: 0 4px 20px rgba(232,180,78,.25);
+  }
+  .btn-check:hover { background: #D4A03A; transform: translateY(-1px); }
+  .btn-check:active { transform: translateY(0); }
+  .btn-check:disabled { opacity: .5; cursor: default; transform: none; }
+
+  /* ── RESULTADO FINAL ──────────────────────────────── */
+  .result-box {
+    display: none;
+    margin-top: 36px;
+    background: #0E1A0E;
+    border: 1px solid #2E5A30;
+    border-radius: 12px;
+    padding: 40px 32px;
+    text-align: center;
+  }
+  .result-box.show { display: block; }
+  .result-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--amarillo);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .result-msg {
+    font-size: 20px;
+    color: var(--blanco);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .result-detail { color: #8A9A88; font-size: 14px; margin-bottom: 28px; }
+
+  .btn-retry {
+    background: transparent;
+    border: 1.5px solid var(--amarillo);
+    color: var(--amarillo);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .btn-retry:hover { background: var(--amarillo); color: var(--tinta); }
+
+  /* ── FOOTER ───────────────────────────────────────── */
+  .footer {
+    background: #120E08;
+    color: #6A5A48;
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 13px;
+  }
+  .footer strong { color: var(--amarillo); }
+
+  /* ── DATO CURIOSO ─────────────────────────────────── */
+  .dato {
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    border-top: 4px solid var(--amarillo);
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+  .dato .dato-label {
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    font-weight: 700; color: var(--sepia); margin-bottom: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ─────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-year">1952</div>
+  <div class="hero-sub">Bolivia · Historia · 6.° de Secundaria</div>
+  <h1>La Reorientación de la Revolución Nacional</h1>
+  <p class="hero-desc">Recorre el proceso histórico que cambió el rumbo de la revolución boliviana, luego pon a prueba lo que aprendiste.</p>
+  <div class="flag-stripe"></div>
+</div>
+
+<!-- ── CONTENIDO INFORMATIVO ─────────────────────────── -->
+<main>
+
+  <!-- SECCIÓN 1: ¿Qué fue? -->
+  <div class="section">
+    <div class="container">
+      <div class="section-label">Introducción</div>
+      <h2>¿Qué fue la Revolución Nacional de 1952?</h2>
+      <p>El 9 de abril de 1952, el <strong>Movimiento Nacionalista Revolucionario (MNR)</strong> liderado por <strong>Víctor Paz Estenssoro</strong> tomó el poder en Bolivia tras una insurrección popular que duró solo tres días. Fue uno de los hechos más importantes de la historia del país: derrocó al gobierno de la <em>rosca minero-feudal</em> y abrió paso a transformaciones profundas.</p>
+
+      <div class="compare-grid">
+        <div class="compare-card izq">
+          <div class="card-label">Antes de 1952</div>
+          <h4>Bolivia oligárquica</h4>
+          <p>Las minas de estaño eran de tres familias (Patiño, Aramayo, Hochschild). Solo una minoría educada y adinerada podía votar. Los indígenas vivían en condición de pongueaje (trabajo forzado).</p>
+        </div>
+        <div class="compare-card der">
+          <div class="card-label">Después de 1952</div>
+          <h4>Bolivia revolucionaria</h4>
+          <p>El Estado tomó las minas. El voto fue universal. La tierra fue redistribuida. Por primera vez el pueblo —obreros, mineros, campesinos— tenía voz política.</p>
+        </div>
+      </div>
+
+      <h3>Los grandes logros iniciales</h3>
+      <ul class="logros-list">
+        <li><strong>Nacionalización de las minas (1952):</strong> el Estado asumió el control de las empresas mineras a través de COMIBOL.</li>
+        <li><strong>Voto universal (1952):</strong> se otorgó el sufragio a todos los adultos, sin importar género, educación o riqueza.</li>
+        <li><strong>Reforma Agraria (1953):</strong> "La tierra es para quien la trabaja". Se repartieron haciendas entre campesinos.</li>
+        <li><strong>Reforma Educativa (1955):</strong> se amplió el acceso a la educación en el campo.</li>
+        <li><strong>Creación de la COB (1952):</strong> la Central Obrera Boliviana nació como el gran poder sindical del pueblo trabajador.</li>
+      </ul>
+
+      <div class="dato">
+        <div class="dato-label">📌 Dato histórico</div>
+        El <strong>17 de junio de 1956</strong> se celebró la primera elección con voto universal en Bolivia. Hernán Siles Suazo ganó con el <strong>84,43%</strong> de los votos. Antes, votar era un privilegio de pocos.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 2: La reorientación -->
+  <div class="section">
+    <div class="container">
+      <div class="section-label">El giro histórico</div>
+      <h2>¿Qué fue la Reorientación?</h2>
+      <p>Con el tiempo, el proceso revolucionario fue <strong>cambiando de rumbo</strong>. Sus ideales más radicales se fueron moderando, sus alianzas internas se fracturaron y la influencia extranjera fue creciendo. A ese proceso se le llama la <em>Reorientación de la Revolución Nacional</em>.</p>
+
+      <div class="quote-block">
+        "La Revolución del 52 fue un proyecto inconcluso y creó una frustración en el indígena, que hizo resurgir el cuestionamiento al Estado republicano."
+        <br><em>— Texto de Aprendizaje 6.° Secundaria, 2025</em>
+      </div>
+
+      <h3>Causa 1: El conflicto COB vs. MNR</h3>
+      <p>La <strong>Central Obrera Boliviana (COB)</strong> y los fundadores del MNR hicieron la revolución juntos, pero pronto se enfrentaron. La COB exigía políticas más radicales: mayor control estatal y mejores condiciones para los trabajadores. El MNR, en cambio, buscaba estabilidad y un gobierno de centro-izquierda que también trabajara con la empresa privada.</p>
+
+      <h3>Causa 2: La inflación</h3>
+      <p>La expansión del Estado generada por la revolución produjo <strong>inflación</strong>: los precios subían y el poder adquisitivo de los bolivianos caía. En 1956, el gobierno de Hernán Siles Suazo se vio obligado a firmar un convenio con Estados Unidos para estabilizar la economía, lo que abrió la puerta a la injerencia extranjera.</p>
+
+      <h3>Causa 3: El Plan Eder y la presión de EE.UU.</h3>
+      <p>En plena <strong>Guerra Fría</strong>, Estados Unidos veía con desconfianza a Bolivia. Aprovechando la debilidad económica boliviana, impulsó el <em>Plan Eder</em>, que exigía mayor inversión extranjera y menor control del Estado sobre las empresas estratégicas. La revolución se fue alejando de su espíritu nacionalista original.</p>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 3: Medidas concretas -->
+  <div class="section">
+    <div class="container">
+      <div class="section-label">Las medidas</div>
+      <h2>Los cambios concretos de la Reorientación</h2>
+
+      <h3>El Código Davenport: el petróleo en manos extranjeras</h3>
+      <p>En 1937, Bolivia había creado <strong>YPFB</strong> (Yacimientos Petrolíferos Fiscales Bolivianos) y nacionalizado el petróleo. El Código Davenport revirtió eso: permitió privatizar activos de YPFB, abrió el sector energético al capital extranjero y eliminó controles de precios. Si bien atrajo inversión, los bolivianos vieron cómo las ganancias se iban al exterior.</p>
+
+      <h3>La Reforma Agraria: efectos diferentes según la región</h3>
+      <div class="compare-grid">
+        <div class="compare-card izq">
+          <div class="card-label">Altiplano y Valles</div>
+          <h4>Fragmentación: el "surcofundio"</h4>
+          <p>Las haciendas se dividieron en parcelas tan pequeñas que muchos campesinos no podían producir eficientemente. Sin crédito ni tecnología, la pobreza rural persistió.</p>
+        </div>
+        <div class="compare-card der">
+          <div class="card-label">Oriente boliviano</div>
+          <h4>Agroindustria de exportación</h4>
+          <p>Se promovió la concentración de capital y el surgimiento de grandes empresas. La soya, arroz y caña de azúcar se convirtieron en cultivos emblemáticos orientados a la exportación.</p>
+        </div>
+      </div>
+
+      <h3>El intento de golpe de la FSB (1959)</h3>
+      <p>El 19 de abril de 1959, la <strong>Falange Socialista Boliviana (FSB)</strong> intentó tomar el Palacio Quemado. El intento fracasó y su líder, Óscar Unzaga de la Vega, murió junto a otros 14 falangistas. Aunque fallido, el evento reveló las profundas tensiones políticas del país.</p>
+
+      <div class="dato">
+        <div class="dato-label">⚡ Para entender</div>
+        <strong>Juan Lechín Oquendo</strong>, "El Maestro", fue el gran líder sindical de la época. Fundó la FSTMB, fue Secretario General de la COB y también Vicepresidente de Bolivia. Representó la tensión permanente entre la clase obrera y el ala moderada del MNR.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 4: El fin -->
+  <div class="section">
+    <div class="container">
+      <div class="section-label">El desenlace</div>
+      <h2>El golpe de 1964: el fin de la Revolución Nacional</h2>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-year">1952</div>
+          <div class="tl-text">El MNR toma el poder. Inicio de la Revolución Nacional bajo Víctor Paz Estenssoro.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1953</div>
+          <div class="tl-text">Decreto de la Reforma Agraria. "La tierra es para quien la trabaja."</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1956</div>
+          <div class="tl-text">Primera elección con voto universal. Hernán Siles Suazo gana con 84,43%. Se firma el convenio con EE.UU. para controlar la inflación.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1959</div>
+          <div class="tl-text">Intento de golpe de la Falange Socialista Boliviana. Fracasa pero evidencia la fragilidad política del gobierno.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1964</div>
+          <div class="tl-text">El 4 de noviembre, el vicepresidente René Barrientos y el comandante Alfredo Ovando derrocan a Paz Estenssoro. Inicio de 18 años de gobiernos militares (1964–1982).</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        Los militares llamaron a su acción una <strong>"Revolución Restauradora"</strong>, alegando que continuaban con los verdaderos ideales de la Revolución Nacional que el MNR había traicionado.
+      </div>
+
+      <p>La revolución dejó logros importantes: voto universal, reforma agraria y la nacionalización de las minas. Pero también deudas históricas, especialmente con los pueblos indígenas, quienes fueron reconocidos solo como "campesinos" sin que se respetara su identidad cultural ni su autonomía como naciones originarias.</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── QUIZ ─────────────────────────────────────────── -->
+<section class="quiz-section" id="quiz">
+  <div class="container">
+    <div class="quiz-header">
+      <div class="section-label">Evaluación interactiva</div>
+      <h2>¿Cuánto aprendiste?</h2>
+      <p>Responde todas las preguntas y luego presiona "Revisar respuestas" para ver tus resultados.</p>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <div class="check-wrap">
+      <button class="btn-check" id="btnCheck" onclick="checkAnswers()">Revisar mis respuestas</button>
+    </div>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-score" id="resultScore"></div>
+      <div class="result-msg" id="resultMsg"></div>
+      <div class="result-detail" id="resultDetail"></div>
+      <button class="btn-retry" onclick="resetQuiz()">Intentar de nuevo</button>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <strong>La Reorientación de la Revolución Nacional</strong><br>
+  Ciencias Sociales · 6.° de Educación Secundaria Comunitaria Productiva · Bolivia 2025
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "¿Quién lideró la Revolución Nacional de 1952 en Bolivia?",
+    options: ["Hugo Bánzer Suárez", "Víctor Paz Estenssoro", "René Barrientos", "Hernán Siles Suazo"],
+    answer: 1,
+    feedback: {
+      ok: "¡Correcto! Víctor Paz Estenssoro, del MNR, fue el líder del proceso revolucionario que comenzó el 9 de abril de 1952.",
+      fail: "La respuesta correcta es Víctor Paz Estenssoro. Fue el presidente que encabezó la Revolución Nacional junto al MNR."
+    }
+  },
+  {
+    q: "¿Cuál fue el principal cambio político que introdujo la Revolución Nacional de 1952?",
+    options: ["La alianza con la Unión Soviética", "El sufragio universal para todos los adultos", "La creación de un partido único de gobierno", "La independencia del poder judicial"],
+    answer: 1,
+    feedback: {
+      ok: "¡Exacto! El voto universal fue uno de los logros más democráticos de la revolución: incluyó a mujeres, indígenas y personas sin instrucción.",
+      fail: "Correcto era el sufragio universal. Antes de 1952, solo podía votar una élite educada y con recursos. La revolución cambió eso radicalmente."
+    }
+  },
+  {
+    q: "¿En qué año se realizó la primera elección con voto universal en Bolivia?",
+    options: ["1952", "1954", "1956", "1960"],
+    answer: 2,
+    feedback: {
+      ok: "¡Muy bien! En 1956 se celebró esa histórica elección, donde Hernán Siles Suazo ganó con el 84,43% de los votos.",
+      fail: "La primera elección con voto universal fue en 1956. Aunque el voto universal se decretó en 1952, la primera votación bajo ese sistema ocurrió en 1956."
+    }
+  },
+  {
+    q: "¿Qué organización representaba a los trabajadores y mineros durante la Revolución Nacional?",
+    options: ["Falange Socialista Boliviana (FSB)", "Partido Comunista Boliviano (PCB)", "Central Obrera Boliviana (COB)", "Corporación Minera de Bolivia (COMIBOL)"],
+    answer: 2,
+    feedback: {
+      ok: "¡Correcto! La COB fue el gran poder sindical de la revolución, aunque luego entró en conflicto con el ala moderada del MNR.",
+      fail: "Era la COB (Central Obrera Boliviana), fundada en 1952. COMIBOL también fue creada en esa época, pero era la empresa estatal de minería, no un sindicato."
+    }
+  },
+  {
+    q: "¿Qué fue el Código Davenport?",
+    options: [
+      "Una ley que amplió los derechos de los pueblos indígenas",
+      "Un código que permitió privatizar YPFB y abrir el petróleo al capital extranjero",
+      "La ley que fundó la Central Obrera Boliviana",
+      "Un decreto que nacionalizó las minas de estaño"
+    ],
+    answer: 1,
+    feedback: {
+      ok: "¡Correcto! El Código Davenport revirtió la nacionalización petrolera de 1937 y abrió YPFB a empresas extranjeras, generando polémica por la distribución inequitativa de los beneficios.",
+      fail: "El Código Davenport permitió privatizar activos de YPFB y abrir el sector petrolero al capital extranjero. Fue uno de los símbolos de la reorientación conservadora de la revolución."
+    }
+  },
+  {
+    q: "¿Qué fue la 'reorientación' de la Revolución Nacional?",
+    options: [
+      "El proceso por el cual Bolivia se convirtió en una monarquía",
+      "La expansión de la revolución a otros países de América Latina",
+      "El cambio de rumbo por el cual la revolución fue moderando sus ideales bajo presiones internas y externas",
+      "La profundización de las medidas socialistas del gobierno del MNR"
+    ],
+    answer: 2,
+    feedback: {
+      ok: "¡Muy bien! La reorientación fue el proceso por el que la revolución fue perdiendo su impulso radical original, cediendo ante el conflicto COB–MNR, la inflación y la presión de EE.UU.",
+      fail: "La reorientación fue el giro conservador de la revolución: sus ideales más radicales se fueron moderando bajo presiones del conflicto interno, la crisis económica y la influencia de Estados Unidos."
+    }
+  },
+  {
+    q: "¿Quién derrocó a Víctor Paz Estenssoro en el golpe de Estado de 1964?",
+    options: ["Juan Lechín Oquendo", "Óscar Unzaga de la Vega", "René Barrientos y Alfredo Ovando", "Hugo Bánzer Suárez"],
+    answer: 2,
+    feedback: {
+      ok: "¡Correcto! El 4 de noviembre de 1964, el vicepresidente René Barrientos y el comandante Alfredo Ovando lideraron el golpe que puso fin a 12 años de gobierno del MNR.",
+      fail: "Fueron René Barrientos (vicepresidente) y Alfredo Ovando Candia (comandante militar) quienes derrocaron a Paz Estenssoro e inauguraron 18 años de gobiernos militares."
+    }
+  },
+  {
+    q: "¿Por qué la Revolución Nacional de 1952 se considera 'inconclusa' para los pueblos indígenas?",
+    options: [
+      "Porque los indígenas no participaron en ningún momento de la revolución",
+      "Porque fueron reconocidos solo como 'campesinos' sin respeto a su identidad cultural como pueblos originarios",
+      "Porque se les negó el derecho al voto hasta 1970",
+      "Porque la reforma agraria no llegó a los territorios indígenas"
+    ],
+    answer: 1,
+    feedback: {
+      ok: "¡Exacto! Los indígenas fueron incorporados bajo el término 'campesinos', pero no se reconoció legalmente su identidad cultural, sus idiomas ni su condición de pueblos con derechos propios.",
+      fail: "La revolución llamó 'campesinos' a los indígenas, pero no reconoció su identidad cultural ni su condición de pueblos originarios. Esa exclusión simbólica y jurídica fue la semilla de futuros movimientos indígenas."
+    }
+  },
+  {
+    q: "¿Qué fue el 'surcofundio'?",
+    options: [
+      "Una empresa agroindustrial creada por el Estado boliviano",
+      "El nombre del plan económico impuesto por Estados Unidos",
+      "La fragmentación de la tierra en parcelas tan pequeñas que dificultaban la producción",
+      "Un movimiento campesino en el oriente boliviano"
+    ],
+    answer: 2,
+    feedback: {
+      ok: "¡Bien! El surcofundio fue el efecto negativo de la reforma agraria en el altiplano: las haciendas se dividieron tanto que los campesinos tenían parcelas insuficientes para producir de forma eficiente.",
+      fail: "El surcofundio fue la excesiva parcelación de tierras en el altiplano. Las haciendas se dividieron en pedazos tan pequeños que limitaban la producción y el acceso a créditos."
+    }
+  },
+  {
+    q: "¿Cuántos años de gobiernos militares inauguró el golpe de Estado de 1964?",
+    options: ["8 años", "12 años", "18 años", "25 años"],
+    answer: 2,
+    feedback: {
+      ok: "¡Correcto! Bolivia vivió 18 años de gobiernos militares entre 1964 y 1982, cuando retornó la democracia.",
+      fail: "El golpe de 1964 inició 18 años de gobiernos militares (1964–1982). Fue una de las etapas más convulsas de la historia boliviana contemporánea."
+    }
+  }
+];
+
+let userAnswers = new Array(QUESTIONS.length).fill(null);
+let checked = false;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  userAnswers = new Array(QUESTIONS.length).fill(null);
+  checked = false;
+  document.getElementById('btnCheck').disabled = false;
+  document.getElementById('resultBox').classList.remove('show');
+  updateProgress();
+
+  QUESTIONS.forEach((q, qi) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = `card-${qi}`;
+
+    const letters = ['A', 'B', 'C', 'D'];
+    const optionsHTML = q.options.map((opt, oi) => `
+      <button class="option-btn" id="opt-${qi}-${oi}" onclick="selectOption(${qi}, ${oi})">
+        <span class="option-letter">${letters[oi]}</span>
+        ${opt}
+      </button>
+    `).join('');
+
+    card.innerHTML = `
+      <div class="q-number">Pregunta ${qi + 1} de ${QUESTIONS.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options-grid">${optionsHTML}</div>
+      <div class="feedback-box" id="feedback-${qi}"></div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function selectOption(qi, oi) {
+  if (checked) return;
+  const prev = userAnswers[qi];
+  if (prev !== null) {
+    document.getElementById(`opt-${qi}-${prev}`).classList.remove('selected');
+  }
+  userAnswers[qi] = oi;
+  document.getElementById(`opt-${qi}-${oi}`).classList.add('selected');
+  document.getElementById(`card-${qi}`).classList.add('answered');
+  updateProgress();
+}
+
+function updateProgress() {
+  const answered = userAnswers.filter(a => a !== null).length;
+  const pct = (answered / QUESTIONS.length) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+function checkAnswers() {
+  const unanswered = userAnswers.filter(a => a === null).length;
+  if (unanswered > 0) {
+    alert(`Aún te faltan ${unanswered} pregunta${unanswered > 1 ? 's' : ''} por responder.`);
+    return;
+  }
+
+  checked = true;
+  document.getElementById('btnCheck').disabled = true;
+  let correct = 0;
+
+  QUESTIONS.forEach((q, qi) => {
+    const selected = userAnswers[qi];
+    const isRight = selected === q.answer;
+    if (isRight) correct++;
+
+    // Disable all buttons
+    q.options.forEach((_, oi) => {
+      const btn = document.getElementById(`opt-${qi}-${oi}`);
+      btn.disabled = true;
+      btn.classList.remove('selected');
+    });
+
+    // Mark correct and wrong
+    document.getElementById(`opt-${qi}-${q.answer}`).classList.add('correct-reveal');
+    if (!isRight) {
+      document.getElementById(`opt-${qi}-${selected}`).classList.add('wrong-reveal');
+    }
+
+    // Show feedback
+    const fb = document.getElementById(`feedback-${qi}`);
+    fb.classList.add('show', isRight ? 'ok' : 'fail');
+    fb.innerHTML = `<strong>${isRight ? '✓ ¡Correcto!' : '✗ Incorrecto'}</strong>${isRight ? q.feedback.ok : q.feedback.fail}`;
+  });
+
+  // Result
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  const rb = document.getElementById('resultBox');
+  document.getElementById('resultScore').textContent = `${correct}/${QUESTIONS.length}`;
+
+  let msg, detail;
+  if (pct === 100) {
+    msg = '¡Excelente! Dominas el tema.';
+    detail = 'Respondiste todas las preguntas correctamente. Estás listo para hablar sobre la Reorientación de la Revolución Nacional.';
+  } else if (pct >= 70) {
+    msg = '¡Muy bien! Buen nivel de comprensión.';
+    detail = 'Tienes una buena base sobre el tema. Repasa las preguntas incorrectas para reforzar.';
+  } else if (pct >= 50) {
+    msg = 'Vas bien, pero puedes mejorar.';
+    detail = 'Lee nuevamente las secciones del contenido y vuelve a intentarlo. ¡Sí puedes!';
+  } else {
+    msg = 'Necesitas repasar el contenido.';
+    detail = 'Vuelve a leer el material con calma antes de intentarlo de nuevo. Todo se puede aprender.';
+  }
+
+  document.getElementById('resultMsg').textContent = msg;
+  document.getElementById('resultDetail').textContent = detail;
+  rb.classList.add('show');
+  rb.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function resetQuiz() {
+  buildQuiz();
+  document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Init
+buildQuiz();
+</script>
+</body>
+</html>
